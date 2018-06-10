@@ -1,0 +1,6 @@
+* Usage
+
+* References
+1- [[https://natelandau.com/my-mac-osx-bash_profile/][Nathanel Landau Blog]]
+2- [[https://github.com/webpro/awesome-dotfiles][Awesome Dotfiles]]
+3- [[http://www.asciiworld.com/-Death-Co-.html][AsciiWorld]]
