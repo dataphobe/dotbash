@@ -158,7 +158,59 @@ function parse_git_branch() {
 }
 
 
+function make_latex(){
 
+    USAGE="Usage: make_latex() -n [name] -c [compiler name] "
+    RANDOM=()
+    NAME="untitled_latex_dir"
+    COMPILER="pdflatex"
+    
+    if [  $# -eq 0 ]
+       then
+	   echo $USAGE
+    else
+	#echo "the argument is $1"
+	while [[ $# -gt 0 ]]
+	do
+	    key="$1"
+	    case $key in
+		-n|--name)
+		    $NAME="$2"
+		    shift # past argument
+		    shift # past value
+		    ;;
+		-c|--compiler)
+		    $COMPILER="$2"
+		    shift # past argument
+		    shift # past value
+		    ;;
+		*)
+		    RANDOM+=("$1") # save it in an array for later
+		    shift # past argument
+		    ;;
+	    esac
+	done
+	
+	mkdir $NAME
+	cd $NAME
+	mkdir out
+	mkdir img
+	git init
+	touch main.tex .gitignore .latexmkrc bib.bib
+	echo "out/" >> .gitignore
+	echo "\\documentclass{article}" >> main.tex
+	echo "\\begin{document}" >> main.tex
+	echo "\end{document}" >> main.tex
+	echo '$pdflatex = "'$COMPILER' -synctex=1  -halt-on-error %O %S";'>> .latexmkrc
+	echo '$sleep_time = 1;'>> .latexmkrc
+	echo "\$view = 'none';">> .latexmkrc
+	echo '$pdf_mode = 1;'>> .latexmkrc
+	echo '$dvi_mode = $postscript_mode = 0;'>> .latexmkrc
+	echo "\$out_dir = 'out';">> .latexmkrc
+	echo "@default_files = ('main.tex');">> .latexmkrc
+    fi
+    
+}
 
 function get_symbol(){
     local SYMBOLS=( '☠ ' '෴ ' '፨ ' 'ᔱ' 'ൠ' '( ͡° ͜ʖ ͡°)' '☃' '☊' '♾' '⛄' )
