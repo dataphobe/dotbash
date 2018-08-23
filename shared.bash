@@ -175,12 +175,12 @@ function make_latex(){
 	    key="$1"
 	    case $key in
 		-n|--name)
-		    $NAME="$2"
+		    NAME="$2"
 		    shift # past argument
 		    shift # past value
 		    ;;
 		-c|--compiler)
-		    $COMPILER="$2"
+		    COMPILER="$2"
 		    shift # past argument
 		    shift # past value
 		    ;;
