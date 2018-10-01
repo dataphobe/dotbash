@@ -43,7 +43,27 @@ case "${unameOut}" in
     MINGW*)     machine=MinGw;;
     *)          machine="UNKNOWN:${unameOut}"
 esac
+function f(){
 
+local unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     
+        if [[ "$(uname -r)" = *"Microsoft"* ]];then
+            explorer.exe .
+        else
+            nautilus .
+        fi
+
+        ;;
+    Darwin*)    
+        open -a Finder ./
+
+        ;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+}
 #   Set default blocksize for ls, df, du
 #   from this: http://hints.macworld.com/comment.php?mode=view&cid=24491
 #   ------------------------------------------------------------
