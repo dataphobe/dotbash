@@ -1,4 +1,4 @@
-####### Start of shared.bash 
+####### Start of shared.bash
 . ~/.bashtmp
 # export LANG=C.UTF-8
 export LANG=en_US.UTF-8
@@ -34,23 +34,25 @@ else
 fi
 unameOut="$(uname -s)"
 case "${unameOut}" in
-    Linux*)     
+    Linux*)
 
         if [[ "$(uname -r)" = *"Microsoft"* ]];then
-            alias subl='/mnt/c/Program\ Files/Sublime\ Text\ 3/sublime_text.exe'
+            function subl(){ /mnt/c/Program\ Files/Sublime\ Text\ 3/sublime_text.exe $@; }
+            # alias subl=''
         fi
         ;;
-    Darwin*)    
+    Darwin*)
         ;;
     CYGWIN*)    machine=Cygwin;;
     MINGW*)     machine=MinGw;;
     *)          machine="UNKNOWN:${unameOut}"
 esac
+
 function f(){
 
 local unameOut="$(uname -s)"
 case "${unameOut}" in
-    Linux*)     
+    Linux*)
         if [[ "$(uname -r)" = *"Microsoft"* ]];then
             explorer.exe .
         else
@@ -58,7 +60,7 @@ case "${unameOut}" in
         fi
 
         ;;
-    Darwin*)    
+    Darwin*)
         open -a Finder ./
 
         ;;
@@ -187,7 +189,7 @@ function make_latex(){
     RANDOM=()
     NAME="untitled_latex_dir"
     COMPILER="pdflatex"
-    
+
     if [  $# -eq 0 ]
        then
 	   echo $USAGE
@@ -213,7 +215,7 @@ function make_latex(){
 		    ;;
 	    esac
 	done
-	
+
 	mkdir $NAME
 	cd $NAME
 	mkdir out
@@ -232,7 +234,7 @@ function make_latex(){
 	echo "\$out_dir = 'out';">> .latexmkrc
 	echo "@default_files = ('main.tex');">> .latexmkrc
     fi
-    
+
 }
 
 function get_symbol(){
@@ -285,11 +287,11 @@ export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 export PS1="\[${MAGENTA}\]\u \[$RESET\]in \[$GREEN\]\w\[$RESET\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$RESET\]\n$(get_symbol)\[$RESET\]"
 export PS2="\[$ORANGE\]→ \[$RESET\]"
 
-WELCOME=( " 
-(\_(\	
-(=' :') ~☠ 
+WELCOME=( "
+(\_(\
+(=' :') ~☠
 (,(')(')
-^^^^^^^^" 
+^^^^^^^^"
 "
   _ _/|
  \'o.0'
@@ -318,12 +320,12 @@ ___----             ___------              \\
                                   |  | ((_(_)| )_)
                                   |  \\_((_(_)|/(_)
                                   \\             (
-                                   \\_____________) 
+                                   \\_____________)
 "
 "
             ___           _,.---,---.,_
-            |         ,;~\'             \'~;, 
-            |       ,;                     ;,      
+            |         ,;~\'             \'~;,
+            |       ,;                     ;,
    Frontal  |      ;                         ; ,--- Supraorbital Foramen
     Bone    |     ,\'                         /\'
             |    ,;                        /\' ;,
@@ -333,16 +335,16 @@ ___----             ___------              \\
            |     |  ~  ,-~~~^~, | ,~^~~~-,  ~  |
  Maxilla,  |      |   |        }:{        | <------ Orbit
 Nasal and  |      |   l       / | \\       !   |
-Zygomatic  |      .~  (__,.--\" .^. \"--.,__)  ~. 
+Zygomatic  |      .~  (__,.--\" .^. \"--.,__)  ~.
   Bones    |      |    ----;\' / | \\ \\';-<--------- Infraorbital Foramen
-           |__     \\__.       \\/^\\/       .__/  
-              ___   V| \\                 / |V <--- Mastoid Process 
-              |      | |T~\\___!___!___/~T| |  
-              |      | |\\'IIII_I_I_I_IIII\'| |  
-     Mandible |      |  \\,III I I I III,/  | 
+           |__     \\__.       \\/^\\/       .__/
+              ___   V| \\                 / |V <--- Mastoid Process
+              |      | |T~\\___!___!___/~T| |
+              |      | |\\'IIII_I_I_I_IIII\'| |
+     Mandible |      |  \\,III I I I III,/  |
               |       \\   \\'~~~~~~~~~~\'    /
               |         \\   .       . <-x---- Mental Foramen
-              |__         \\.    ^    ./   
+              |__         \\.    ^    ./
                             ^~~~^~~~^
 "
 
@@ -372,7 +374,7 @@ Zygomatic  |      .~  (__,.--\" .^. \"--.,__)  ~.
                   \\  :    T^T T-+-T T^T    ;<
                    \\..'_       -+-       _'  )
          )            . '--=.._____..=--'. ./         (
-        ((     ) (          )             (     ) (   )> 
+        ((     ) (          )             (     ) (   )>
          > \\/^/) )) (   ( /(.      ))     ))._/(__))./ (_.
         (  _../ ( \\))    )   \\ (  / \\.  ./ ||  ..__:|  _. \\
         |  \\__.  ) |   (/  /: :)) |   \\/   |(  <.._  )|  ) )
@@ -414,5 +416,5 @@ echo "${WELCOME[$(( $RANDOM % 7 ))]} "
 
 
 
-####### End of shared.bash 
+####### End of shared.bash
 
