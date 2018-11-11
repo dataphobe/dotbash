@@ -166,7 +166,7 @@ alias myext='la | sed "s|.*\.||" | sort -u'
 
 # Git
 # You must install Git first
-alias gs='git status'
+alias gs='git status -u'
 alias ga='git add .'
 alias gc='git commit -m' # requires you to type a commit message
 alias gp='git push'
