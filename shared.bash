@@ -274,6 +274,10 @@ zipf () { zip -r "$1".zip "$1" ; }          # zipf:         To create a ZIP arch
         curl http://wttr.in/$1
     }
 
+    cheats(){
+        curl http://cheat.sh/$1
+    }
+
 # Backup
 
 
