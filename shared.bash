@@ -212,6 +212,8 @@ function make_latex(){
 		*)
 		    RANDOM+=("$1") # save it in an array for later
 		    shift # past argument
+                    echo $USAGE
+                    return 0
 		    ;;
 	    esac
 	done
@@ -220,11 +222,19 @@ function make_latex(){
 	cd $NAME
 	mkdir out
 	mkdir img
+        convert -size 200x200 xc:white img/testimg.jpg
 	git init
 	touch main.tex .gitignore .latexmkrc bib.bib
 	echo "out/" >> .gitignore
 	echo "\\documentclass{article}" >> main.tex
+        echo "\\usepackage{graphics}" >> main.tex
 	echo "\\begin{document}" >> main.tex
+        echo "\begin{figure}" >> main.tex
+        echo "  \centering" >> main.tex
+        echo "  \includegraphics{img/testimg.jpg}"  >> main.tex
+        echo "  \caption[Caption for LOF]{Real caption\textsuperscript{a=}}" >> main.tex
+        echo "  \small\textsuperscript{a=} The footnote-like comment under the caption" >> main.tex
+        echo "\end{figure}" >> main.tex
 	echo "\end{document}" >> main.tex
 	echo '$pdflatex = "'$COMPILER' -synctex=1  -halt-on-error %O %S";'>> .latexmkrc
 	echo '$sleep_time = 1;'>> .latexmkrc
